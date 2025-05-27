@@ -1,0 +1,80 @@
+<template>
+  <div class="slds-text-align_center">
+    
+    <!-- Main action button inside a Lightning Card -->
+    <lightning-card>
+      <!-- Primary button to trigger document scanning -->
+      <lightning-button
+        label={buttonLabel}
+        title={buttonLabel}
+        variant={buttonVariant}
+        icon-name={buttonIconName}
+        icon-position={buttonIconPosition}
+        class={buttonClass}
+        onclick={scanDocument}
+        disabled={isLoading}
+      ></lightning-button>
+
+      <!-- Conditionally render "View File" button if document is uploaded -->
+      <template if:true={contentDocumentId}>
+        <lightning-button
+          variant="brand-outline"
+          label="View File"
+          title="View File"
+          onclick={handleViewFile}
+          icon-name="utility:preview"
+          slot="footer"
+        ></lightning-button>
+      </template>
+    </lightning-card>
+
+    <!-- Debug Mode UI -->
+    <template if:true={isDebug}>
+      <lightning-card title="Debug Mode" icon-name="action:apex">
+        
+        <!-- Display the input JSON -->
+        <div class="slds-p-around_medium">
+          <lightning-textarea
+            label="Input JSON"
+            value={formattedJsonInput}
+            readonly
+          ></lightning-textarea>
+          <lightning-button
+            icon-name="standard:file"
+            label="Copy to Clipboard"
+            name="copyInputJSON"
+            onclick={copyClipboard}
+          ></lightning-button>
+        </div>
+
+        <!-- Display the output JSON -->
+        <div class="slds-p-around_medium">
+          <lightning-textarea
+            label="Output JSON"
+            value={formattedJsonOutput}
+            readonly
+          ></lightning-textarea>
+          <lightning-button
+            icon-name="standard:file"
+            label="Copy to Clipboard"
+            name="copyOutputJSON"
+            onclick={copyClipboard}
+          ></lightning-button>
+        </div>
+
+      </lightning-card>
+    </template>
+
+    <!-- Loading Spinner shown during scan process -->
+    <template if:true={isLoading}>
+      <div class="slds-m-top_medium slds-align_absolute-center slds-text-align_center">
+        <p class="slds-text-body_regular slds-m-bottom_small">Please wait...</p>
+        <lightning-spinner
+          alternative-text="Scanning..."
+          size="medium"
+        ></lightning-spinner>
+      </div>
+    </template>
+
+  </div>
+</template>

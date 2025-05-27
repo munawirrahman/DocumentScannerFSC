@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Document Scanner FSC</masterLabel>
+    <description>Component to scan documents on mobile, extract text and entities, upload as ContentDocument, and pass data to Flow.</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <!-- Input Only properties -->
+            <property name="isDebug" label="00. Is Debug?" description="Display input and output variables in JSON?" type="Boolean" role="inputOnly" required="false"/>
+            <property name="isRequired" label="00. Is Required?" description="Is a document required to move screen?" type="Boolean" role="inputOnly" required="false"/>
+            <property name="buttonLabel" label="01. Button Label" description="The text to be displayed inside the main button." type="String" role="inputOnly" required="true" default="Scan a Document"/>
+            <property name="buttonVariant" label="02. Button Variant" description="base, neutral, brand, brand-outline, destructive, destructive-text, inverse, and success" type="String" role="inputOnly" default="brand" required="true"/>
+            <property name="buttonIconName" label="03. Button Icon Name" description="The Lightning Design System name of the icon." type="String" role="inputOnly" default="utility:file" required="true"/>
+            <property name="buttonIconPosition" label="04. Button Icon Position" description="left or right" type="String" role="inputOnly" default="left" required="true"/>
+            <property name="buttonClass" label="05. Button CSS Class" type="String" role="inputOnly" default="slds-m-left_x-small" required="true"/>
+            
+            <property name="recordId" label="06. Record Id" description="Related record Id for Content Document" type="String" role="inputOnly" required="true"/>
+            <property name="isGoToNextScreenAfterScan" description="Auto navigate to next screen after scan success" label="07. Go To Next Screen After Scan" type="Boolean" role="inputOnly" default="false" required="true"/>
+            
+            <property name="optionImageSource" label="08. Image Source Option" description="PHOTO_LIBRARY or DEVICE_CAMERA" type="String" role="inputOnly" default="PHOTO_LIBRARY" required="true"/>
+            <property name="optionPermissionRationaleText" label="09. Permission Rationale Text" description="Only for Android implementations. The text shown in the UI when the device prompts the user to grant permission for your app to use the camera." type="String" role="inputOnly" default="Camera access is required to scan documents." required="true"/>
+            <property name="optionScriptHint" label="10. Script Hint" description="LATIN, CHINESE, DEVANAGARI, JAPANESE, or KOREAN" type="String" role="inputOnly" default="LATIN" required="true"/>
+            <property name="optionEntityExtractionLanguageCode" description="To specify the language, identify one of the supported languages in Google Entity Extraction ML Kit (https://developers.google.com/ml-kit/language/identification/langid-support)" label="11. Entity Extraction Language Code" type="String" role="inputOnly" default="en" required="true"/>
+            
+            
+            <!-- Output Only properties -->
+            <property name="scannedDocumentText" label="Scanned Document Text" type="String" role="outputOnly"/>
+            <property name="scannedDocumentBlocks" label="Scanned Document Blocks" type="String[]" role="outputOnly"/>
+            <property name="scannedDocumentEntities" label="Scanned Document Entities" type="String[]" role="outputOnly"/>
+            <property name="contentDocumentId" label="Content Document Id" type="String" role="outputOnly"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
