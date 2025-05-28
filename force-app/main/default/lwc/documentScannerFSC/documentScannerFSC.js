@@ -98,7 +98,6 @@ export default class DocumentScannerFSC extends NavigationMixin(LightningElement
             returnImageBytes: true,
             extractEntities: true
         };
-        this.test = JSON.stringify(options)
 
         scanner.scan(options)
             .then(results => this.handleScanSuccess(results))
